@@ -1,7 +1,9 @@
 import React from "react";
 import Section01 from '../../assets/img/section1.jpg';
+import { useInView } from 'react-intersection-observer';
 
 export default function Section1() {
+  
   return (
     <section className="bg-black py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-8 items-center">
