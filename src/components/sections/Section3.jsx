@@ -20,7 +20,7 @@ const Team = () => {
     },
     {
       id: 2,
-      name: "Vinicius Pereira",
+      name: "Vinicius De Moraes",
       role: "Fronted developer",
       description:
         "Entrega soluções inovadoras com foco na qualidade e na melhor experiência para o usuário.",
