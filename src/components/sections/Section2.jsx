@@ -1,4 +1,48 @@
 import React from "react";
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+
+const ServiceCard = ({ service }) => {
+  const controls = useAnimation();
+  const [ref, inView] = useInView({ threshold: 0.2 });
+
+  React.useEffect(() => {
+    if (inView) {
+      controls.start("visible");
+    }
+  }, [controls, inView]);
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeInOut" } },
+  };
+
+  return (
+    <motion.div
+      ref={ref}
+      className="relative group bg-black border border-[#07bdbb] rounded-xl p-6 shadow-lg transition-all duration-300 hover:shadow-[#07bdbb]/50 hover:border-white hover:scale-105"
+      variants={cardVariants}
+      initial="hidden"
+      animate={controls}
+    >
+      {/* Ícone com efeito de brilho */}
+      <div className="w-14 h-14 flex items-center justify-center bg-[#07bdbb] rounded-full shadow-md mb-6 transition-transform group-hover:scale-110 group-hover:bg-white">
+        <i className={`${service.icon} text-black text-2xl`}></i>
+      </div>
+
+      {/* Título e Descrição */}
+      <h3 className="text-xl font-bold text-white mb-4 group-hover:text-[#07bdbb] transition-colors duration-300">
+        {service.title}
+      </h3>
+      <p className="text-gray-300 text-sm leading-relaxed group-hover:text-white">
+        {service.description}
+      </p>
+
+      {/* Efeito decorativo */}
+      <div className="absolute inset-0 rounded-xl border-2 border-transparent group-hover:border-[#07bdbb] transition-all duration-300"></div>
+    </motion.div>
+  );
+};
 
 const Services = () => {
   const services = [
@@ -7,78 +51,65 @@ const Services = () => {
       title: "Frontend Responsivo",
       description:
         "Desenvolvemos interfaces dinâmicas e responsivas com React e tecnologias modernas.",
-      icon: "🖥️",
+      icon: "fas fa-laptop-code",
     },
     {
       id: 2,
       title: "Integração de APIs",
       description:
         "Integramos aplicações usando REST e GraphQL para eficiência e conectividade.",
-      icon: "🔗",
+      icon: "fas fa-network-wired",
     },
     {
       id: 3,
       title: "Design Moderno",
       description:
         "Criamos experiências adaptáveis que priorizam a usabilidade e o design.",
-      icon: "📱",
+      icon: "fas fa-mobile-alt",
     },
     {
       id: 4,
       title: "Banco de Dados Seguro",
       description:
         "Gerenciamos dados com SQL e MongoDB, garantindo segurança e escalabilidade.",
-      icon: "🗄️",
+      icon: "fas fa-database",
     },
     {
       id: 5,
       title: "Testes Automatizados",
       description:
         "Asseguramos a qualidade do código com Jest e Cypress para testes robustos.",
-      icon: "✅",
+      icon: "fas fa-vial",
     },
     {
       id: 6,
       title: "Alta Performance",
       description:
         "Aprimoramos aplicações, reduzindo tempos de carregamento e uso de recursos.",
-      icon: "⚡",
+      icon: "fas fa-rocket",
     },
   ];
-  
 
   return (
-    <section className="bg-black py-12">
+    <section id="tecnologias" className="bg-black py-16">
       <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-10">
-        <div className="text-left mb-8">
+        {/* Título da seção */}
+        <div className="text-center mb-12">
           <h2
-            className="text-3xl font-semibold text-[#d02013]"
+            className="text-4xl font-bold text-[#07bdbb] tracking-wide"
             style={{ fontFamily: '"Pixelify Sans", sans-serif' }}
           >
             Tecnologias e Habilidades
           </h2>
-          <p className="text-white mt-4">
-            Excelência em desenvolvimento web e design responsivo.
+          <p className="text-white mt-4 text-lg">
+            Soluções que combinam tecnologia de ponta com design inovador.
           </p>
         </div>
+
+        {/* Grade de serviços */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service) => (
-            <div
-              key={service.id}
-              className="flex items-start bg-[#0a0a0a] rounded-lg p-6 shadow-[0_4px_6px_rgba(4,173,239,0.2)] transition-transform transform hover:scale-105"
-            >
-              {/* Ícone */}
-              <div className="text-5xl text-gray-400 mr-4 group-hover:text-[#04adef] transition-colors duration-300">
-                {service.icon}
-              </div>
-              {/* Conteúdo */}
-              <div>
-                <h3 className="text-xl font-semibold text-white group-hover:text-[#04adef] transition-colors duration-300 mb-2">
-                  {service.title}
-                </h3>
-                <p className="text-white text-sm">{service.description}</p>
-              </div>
-            </div>
+            <ServiceCard key={service.id} service={service} />
           ))}
         </div>
       </div>

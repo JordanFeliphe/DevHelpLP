@@ -1,79 +1,116 @@
 import React from "react";
-import Section01 from '../../assets/img/section1.jpg';
-import { useInView } from 'react-intersection-observer';
+import Section01 from "../../assets/img/section1.jpg";
+import { motion } from "framer-motion";
 
 export default function Section1() {
-  
+  const fadeIn = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeInOut" } },
+  };
+
+  const fadeInLeft = {
+    hidden: { opacity: 0, x: -50 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: "easeInOut" } },
+  };
+
+  const fadeInRight = {
+    hidden: { opacity: 0, x: 50 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: "easeInOut" } },
+  };
+
   return (
-    <section className="bg-black py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-8 items-center">
+    <motion.section
+      id="sobre"
+      className="bg-black py-16"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-16 items-center">
         {/* Texto e Lista */}
-        <div>
-          <h2 className="text-3xl font-bold text-[#d02013] mb-4"
-           style={{ fontFamily: '"Pixelify Sans", sans-serif' }}>Sobre nós</h2>
-          <p className="text-white mb-8">
-          Somos uma equipe apaixonada por desenvolvimento front-end, comprometida em transformar ideias em experiências digitais únicas. Com foco em interfaces modernas, intuitivas e responsivas, buscamos aliar design inovador e tecnologia de ponta para entregar soluções eficientes e cativantes.
+        <motion.div
+          variants={fadeInLeft}
+          className="space-y-8"
+        >
+          <h2
+            className="text-3xl font-bold text-[#07bdbb] mb-4"
+            style={{ fontFamily: '"Pixelify Sans", sans-serif' }}
+          >
+            Sobre nós
+          </h2>
+          <p className="text-white mb-8 leading-relaxed">
+            Somos uma equipe apaixonada por desenvolvimento front-end,
+            comprometida em transformar ideias em experiências digitais únicas.
+            Com foco em interfaces modernas, intuitivas e responsivas, buscamos
+            aliar design inovador e tecnologia de ponta para entregar soluções
+            eficientes e cativantes.
           </p>
 
           {/* Lista */}
-          <div className="space-y-6">
-            {/* Item 1 */}
-            <div className="flex items-start space-x-4">
-              <div className="text-[#d02013] text-2xl">
-                <i className="fas fa-users"></i>
+          {[
+            {
+              icon: "fas fa-users",
+              title: "Parcerias que impulsionam resultado",
+              text: "Atuamos lado a lado com nossos clientes, transformando ideias em projetos que impactam e conectam pessoas.",
+            },
+            {
+              icon: "fas fa-clipboard",
+              title: "Planejamento estratégico e execução impecável",
+              text: "Unimos organização e criatividade para desenvolver soluções digitais inovadoras e de alto desempenho.",
+            },
+            {
+              icon: "fas fa-broadcast-tower",
+              title: "Inovação que conecta",
+              text: "Criamos experiências digitais que engajam, aproximam e deixam uma marca duradoura no universo digital.",
+            },
+            {
+              icon: "fas fa-cogs",
+              title: "Soluções personalizadas",
+              text: "Desenvolvemos soluções sob medida que atendem às necessidades exclusivas de cada cliente, garantindo eficiência e resultados impactantes.",
+            },
+          ].map((item, index) => (
+            <motion.div
+              key={index}
+              className="flex items-start space-x-4"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              variants={fadeIn}
+              transition={{ duration: 0.6, delay: index * 0.3 }}
+            >
+              <div className="text-[#07bdbb] text-3xl">
+                <i className={item.icon}></i>
               </div>
               <div>
-                <h3 className="text-lg font-bold text-[#04a1c4]"
+                <h3
+                  className="text-lg font-bold text-[#07bdbb] mb-2"
+                  style={{ fontFamily: '"Pixelify Sans", sans-serif' }}
                 >
-                Parcerias que impulsionam resultado
+                  {item.title}
                 </h3>
-                <p className="text-white">
-                Atuamos lado a lado com nossos clientes, transformando ideias em projetos que impactam e conectam pessoas.
-                </p>
+                <p className="text-white leading-relaxed">{item.text}</p>
               </div>
-            </div>
+            </motion.div>
+          ))}
+        </motion.div>
 
-            {/* Item 2 */}
-            <div className="flex items-start space-x-4">
-              <div className="text-[#d02013] text-2xl">
-                <i className="fas fa-clipboard"></i>
-              </div>
-              <div>
-                <h3 className="text-lg font-bold text-[#04a1c4]">
-                Planejamento estratégico e execução impecável
-                </h3>
-                <p className="text-white">
-                Unimos organização e criatividade para desenvolver soluções digitais inovadoras e de alto desempenho.
-                </p>
-              </div>
-            </div>
-
-            {/* Item 3 */}
-            <div className="flex items-start space-x-4">
-              <div className="text-[#d02013] text-2xl">
-                <i className="fas fa-broadcast-tower"></i>
-              </div>
-              <div>
-                <h3 className="text-lg font-bold text-[#04a1c4]">
-                Inovação que conecta
-                </h3>
-                <p className="text-white">
-                Criamos experiências digitais que engajam, aproximam e deixam uma marca duradoura no universo digital.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Imagem com Botão */}
-        <div className="relative">
-          <img
+        {/* Imagem com Animação */}
+        <motion.div
+          className="relative"
+          variants={fadeInRight}
+        >
+          <motion.img
             src={Section01}
-            alt="Team"
-            className="rounded-lg shadow-md"
+            alt="Equipe trabalhando"
+            className="rounded-lg shadow-lg w-full h-auto object-cover"
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 1, ease: "easeInOut" }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 1 }}
           />
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 }

@@ -22,3 +22,24 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Estilo global para scrollbars em navegadores baseados no WebKit */
+::-webkit-scrollbar {
+  width: 8px; /* Largura da scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a; /* Cor da trilha */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #07bdbb; /* Cor do "polegar" (a parte que move) */
+  border-radius: 4px; /* Arredondar as bordas */
+  border: 2px solid #1a1a1a; /* Borda ao redor do polegar */
+}
+
+/* Estilo para navegadores Firefox */
+* {
+  scrollbar-width: thin; /* Espessura fina */
+  scrollbar-color: #07bdbb #1a1a1a; /* Cor do polegar e da trilha */
+}

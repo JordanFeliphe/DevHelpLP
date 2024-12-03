@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import Logo from '../../assets/img/Logo.png';
+import React, { useState, useEffect } from "react";
 
 function Navbar() {
   const [scrollOpacity, setScrollOpacity] = useState(0);
@@ -7,69 +6,67 @@ function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const maxScroll = 200; // Distância máxima para a transição de opacidade
+      const maxScroll = 200;
       const currentScroll = window.scrollY;
-      const opacity = Math.min(currentScroll / maxScroll, 1); // Calcula a opacidade (0 a 1)
+      const opacity = Math.min(currentScroll / maxScroll, 1);
       setScrollOpacity(opacity);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const handleMobileClick = (href) => {
+    setIsOpen(false); // Fecha o menu
+    const element = document.querySelector(href); // Seleciona o elemento correspondente ao ID
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" }); // Faz o scroll suave até o elemento
+    }
+  };
 
   return (
     <nav
       className="fixed top-0 w-full z-50 transition duration-300"
       style={{
-        backgroundColor: `rgba(0, 0, 0, ${scrollOpacity})`, // Opacidade dinâmica
-        boxShadow: scrollOpacity > 0.2 ? '0 2px 4px rgba(0, 0, 0, 0.1)' : 'none', // Sombra ao rolar
+        backgroundColor: `rgba(0, 0, 0, ${scrollOpacity})`,
+        boxShadow:
+          scrollOpacity > 0.2 ? "0 4px 10px rgba(0, 0, 0, 0.3)" : "none",
       }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            {/* <a href="/">
-              <img src={Logo} alt="Logo" className="h-14 w-auto" />
-            </a> */}
-          </div>
-
+        <div className="flex justify-end items-center h-16">
           {/* Menu Links (Desktop) */}
-          <div className="hidden md:flex space-x-6 justify-end">
-            <a
-              href="#precos"
-              className="flex items-center space-x-2 text-[#04adef] hover:text-[#b7153b] text-sm font-medium"
-            >
-              <i className="fas fa-home"></i> <span>Preços</span>
-            </a>
-            <a
-              href="#sobre"
-              className="flex items-center space-x-2 text-[#04adef] hover:text-[#b7153b] text-sm font-medium"
-            >
-              <i className="fas fa-info-circle"></i> <span>Sobre</span>
-            </a>
-            <a
-              href="#blog"
-              className="flex items-center space-x-2 text-[#04adef] hover:text-[#b7153b] text-sm font-medium "
-            >
-              <i className="fas fa-blog"></i> <span>Blog</span>
-            </a>
-            <a
-              href="#depoimentos"
-              className="flex items-center space-x-2 text-[#04adef] hover:text-[#b7153b] text-sm font-medium"
-            >
-              <i className="fas fa-comments"></i> <span>Depoimentos</span>
-            </a>
+          <div className="hidden md:flex space-x-8">
+            {[
+              { href: "#inicio", label: "Início", icon: "fas fa-home" },
+              { href: "#sobre", label: "Sobre", icon: "fas fa-info-circle" },
+              { href: "#tecnologias", label: "Tecnologias", icon: "fas fa-tools" },
+              { href: "#time", label: "Time", icon: "fas fa-users" },
+              { href: "#projetos", label: "Projetos", icon: "fas fa-project-diagram" },
+            ].map((item, index) => (
+              <a
+                key={index}
+                href={item.href}
+                className="flex items-center space-x-2 text-[#07bdbb] hover:text-white text-sm font-medium group"
+              >
+                <i
+                  className={`${item.icon} text-lg transition-transform transform group-hover:scale-110`}
+                ></i>
+                <span className="transition-colors group-hover:underline">
+                  {item.label}
+                </span>
+              </a>
+            ))}
           </div>
 
           {/* Menu Button (Hamburger) */}
-          <div className="flex md:hidden justify-end">
+          <div className="flex md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
               type="button"
-              className="text-[#b7153b] hover:text-gray-400"
+              className="text-[#07bdbb] hover:text-white"
             >
               <svg
                 className="h-6 w-6"
@@ -84,8 +81,8 @@ function Navbar() {
                   strokeWidth="2"
                   d={
                     isOpen
-                      ? 'M6 18L18 6M6 6l12 12'
-                      : 'M4 6h16M4 12h16m-7 6h7'
+                      ? "M6 18L18 6M6 6l12 12"
+                      : "M4 6h16M4 12h16m-7 6h7"
                   }
                 />
               </svg>
@@ -96,47 +93,35 @@ function Navbar() {
 
       {/* Menu Links (Mobile) */}
       <div
-        className={`fixed top-0 right-0 h-full w-64 bg-black shadow-md transform transition-transform duration-300 ${
-          isOpen ? 'translate-x-0' : 'translate-x-full'
+        className={`fixed top-0 right-0 h-full w-64 bg-black shadow-lg transform transition-transform duration-500 ease-in-out ${
+          isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="space-y-3 p-4">
+        <div className="p-6 space-y-6">
           <button
             onClick={() => setIsOpen(false)}
-            className="text-white text-xl mb-4"
+            className="text-white text-xl self-end mb-6 hover:text-[#07bdbb]"
           >
             ✖
           </button>
-          <a
-            href="#precos"
-            className="flex items-center space-x-2 text-[#04adef] hover:text-[#b7153b] text-sm font-medium border-b-2 border-transparent hover:border-[#b7153b] transition-all"
-          >
-            <i className="fas fa-home"></i> <span>Preços</span>
-          </a>
-          <a
-            href="#sobre"
-            className="flex items-center space-x-2 text-[#04adef] hover:text-[#b7153b] text-sm font-medium border-b-2 border-transparent hover:border-[#b7153b] transition-all"
-          >
-            <i className="fas fa-info-circle"></i> <span>Sobre</span>
-          </a>
-          <a
-            href="#blog"
-            className="flex items-center space-x-2 text-[#04adef] hover:text-[#b7153b] text-sm font-medium border-b-2 border-transparent hover:border-[#b7153b] transition-all"
-          >
-            <i className="fas fa-blog"></i> <span>Blog</span>
-          </a>
-          <a
-            href="#depoimentos"
-            className="flex items-center space-x-2 text-[#04adef] hover:text-[#b7153b] text-sm font-medium border-b-2 border-transparent hover:border-[#b7153b] transition-all"
-          >
-            <i className="fas fa-comments"></i> <span>Depoimentos</span>
-          </a>
-          <a
-            href="#entrar"
-            className="flex items-center space-x-2 text-[#04adef] hover:text-[#b7153b] text-sm font-medium border-b-2 border-transparent hover:border-[#b7153b] transition-all"
-          >
-            <i className="fas fa-sign-in-alt"></i> <span>Entrar</span>
-          </a>
+          {[
+            { href: "#inicio", label: "Início", icon: "fas fa-home" },
+            { href: "#sobre", label: "Sobre", icon: "fas fa-info-circle" },
+            { href: "#tecnologias", label: "Tecnologias", icon: "fas fa-tools" },
+            { href: "#time", label: "Time", icon: "fas fa-users" },
+            { href: "#projetos", label: "Projetos", icon: "fas fa-project-diagram" },
+          ].map((item, index) => (
+            <button
+              key={index}
+              onClick={() => handleMobileClick(item.href)}
+              className="flex items-center space-x-3 text-[#07bdbb] hover:text-white text-sm font-medium border-b border-transparent hover:border-[#07bdbb] transition-all w-full text-left"
+            >
+              <i
+                className={`${item.icon} text-lg transition-transform transform group-hover:scale-110`}
+              ></i>
+              <span>{item.label}</span>
+            </button>
+          ))}
         </div>
       </div>
     </nav>
