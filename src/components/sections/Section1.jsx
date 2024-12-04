@@ -27,11 +27,7 @@ export default function Section1() {
       viewport={{ once: true, amount: 0.2 }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-16 items-center">
-        {/* Texto e Lista */}
-        <motion.div
-          variants={fadeInLeft}
-          className="space-y-8"
-        >
+        <motion.div variants={fadeInLeft} className="space-y-8">
           <h2
             className="text-3xl font-bold text-[#07bdbb] mb-4"
             style={{ fontFamily: '"Pixelify Sans", sans-serif' }}
@@ -45,8 +41,6 @@ export default function Section1() {
             aliar design inovador e tecnologia de ponta para entregar soluções
             eficientes e cativantes.
           </p>
-
-          {/* Lista */}
           {[
             {
               icon: "fas fa-users",
@@ -93,12 +87,7 @@ export default function Section1() {
             </motion.div>
           ))}
         </motion.div>
-
-        {/* Imagem com Animação */}
-        <motion.div
-          className="relative"
-          variants={fadeInRight}
-        >
+        <motion.div className="relative" variants={fadeInRight}>
           <motion.img
             src={Section01}
             alt="Equipe trabalhando"

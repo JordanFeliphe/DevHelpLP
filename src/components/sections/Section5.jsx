@@ -10,17 +10,15 @@ const TechnologyCard = ({ technology }) => {
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
     >
-      {/* Fundo Brilhante */}
       <div className="absolute inset-0 bg-gradient-to-r from-[#07bdbb] to-transparent opacity-0 group-hover:opacity-25 transition-opacity duration-500 rounded-xl"></div>
-      {/* Ícone Flutuante Centralizado */}
       <motion.div
         className="mb-4 relative z-10 flex items-center justify-center"
         animate={{
-          y: [0, -5, 0], // Movimento sutil de flutuação
+          y: [0, -5, 0], 
         }}
         transition={{
           repeat: Infinity,
-          duration: 3, // Ciclo lento para flutuar
+          duration: 3, 
           ease: "easeInOut",
         }}
       >
@@ -75,7 +73,6 @@ const Section5 = () => {
       icon: <SiTypescript className="text-blue-600" />,
     },
   ];
-
   return (
     <section id="section5" className="bg-black py-16">
       <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-10">

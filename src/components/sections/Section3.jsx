@@ -31,7 +31,6 @@ const TeamMember = ({ member }) => {
       initial="hidden"
       animate={controls}
     >
-      {/* Imagem do membro */}
       <div className="relative">
         <img
           src={member.image}
@@ -39,7 +38,6 @@ const TeamMember = ({ member }) => {
           className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-[#07bdbb] mx-auto"
         />
       </div>
-      {/* Texto */}
       <div className="text-center mt-6">
         <h3 className="text-xl font-bold text-white">{member.name}</h3>
         <p className="text-[#07bdbb] font-medium">{member.role}</p>

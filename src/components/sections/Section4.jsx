@@ -26,7 +26,6 @@ const ProjectCard = ({ project }) => {
       initial="hidden"
       animate={controls}
     >
-      {/* Ícone do projeto */}
       <div className="text-[#07bdbb] text-4xl mb-4 flex justify-center">
         {project.icon}
       </div>

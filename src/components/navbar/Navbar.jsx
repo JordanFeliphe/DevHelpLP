@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import ContactModal from "../../components/modal/ContactModal";
 
 function Navbar() {
   const [scrollOpacity, setScrollOpacity] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,11 +22,20 @@ function Navbar() {
     };
   }, []);
 
-  const handleMobileClick = (href) => {
-    setIsOpen(false); // Fecha o menu
-    const element = document.querySelector(href); // Seleciona o elemento correspondente ao ID
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" }); // Faz o scroll suave até o elemento
+  const handleNavigation = (href, action) => {
+    if (action) {
+      action();
+    } else if (href.startsWith("/#")) {
+      const sectionId = href.split("#")[1];
+      navigate("/");
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 300);
+    } else {
+      navigate(href);
     }
   };
 
@@ -43,20 +54,19 @@ function Navbar() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-end items-center h-16">
-            {/* Menu Links (Desktop) */}
             <div className="hidden md:flex space-x-8">
               {[
                 { href: "/", label: "Início", icon: "fas fa-home" },
-                { href: "#sobre", label: "Sobre", icon: "fas fa-info-circle" },
-                { href: "#tecnologias", label: "Tecnologias", icon: "fas fa-tools" },
-                { href: "#time", label: "Time", icon: "fas fa-users" },
+                { href: "/#sobre", label: "Sobre", icon: "fas fa-info-circle" },
+                { href: "/#tecnologias", label: "Tecnologias", icon: "fas fa-tools" },
+                { href: "/#time", label: "Time", icon: "fas fa-users" },
                 { href: "/projects", label: "Projetos", icon: "fas fa-project-diagram" },
                 { label: "Contato", icon: "fas fa-envelope", action: openContactModal },
               ].map((item, index) =>
                 item.action ? (
                   <button
                     key={index}
-                    onClick={item.action}
+                    onClick={() => handleNavigation(null, item.action)}
                     className="flex items-center space-x-2 text-white hover:text-[#07bdbb] text-sm font-medium group"
                   >
                     <i
@@ -69,8 +79,8 @@ function Navbar() {
                 ) : (
                   <a
                     key={index}
-                    href={item.href}
-                    className="flex items-center space-x-2 text-white hover:text-[#07bdbb] text-sm font-medium group"
+                    onClick={() => handleNavigation(item.href, null)}
+                    className="flex items-center space-x-2 text-white hover:text-[#07bdbb] text-sm font-medium group cursor-pointer"
                   >
                     <i
                       className={`${item.icon} text-lg transition-transform transform group-hover:scale-110`}
@@ -82,8 +92,6 @@ function Navbar() {
                 )
               )}
             </div>
-
-            {/* Menu Button (Hamburger) */}
             <div className="flex md:hidden">
               <button
                 onClick={() => setIsOpen(!isOpen)}
@@ -112,8 +120,6 @@ function Navbar() {
             </div>
           </div>
         </div>
-
-        {/* Menu Links (Mobile) */}
         <div
           className={`fixed top-0 right-0 h-full w-64 bg-black shadow-lg transform transition-transform duration-500 ease-in-out ${
             isOpen ? "translate-x-0" : "translate-x-full"
@@ -128,16 +134,16 @@ function Navbar() {
             </button>
             {[
               { href: "/", label: "Início", icon: "fas fa-home" },
-              { href: "#sobre", label: "Sobre", icon: "fas fa-info-circle" },
-              { href: "#tecnologias", label: "Tecnologias", icon: "fas fa-tools" },
-              { href: "#time", label: "Time", icon: "fas fa-users" },
+              { href: "/#sobre", label: "Sobre", icon: "fas fa-info-circle" },
+              { href: "/#tecnologias", label: "Tecnologias", icon: "fas fa-tools" },
+              { href: "/#time", label: "Time", icon: "fas fa-users" },
               { href: "/projects", label: "Projetos", icon: "fas fa-project-diagram" },
               { label: "Contato", icon: "fas fa-envelope", action: openContactModal },
             ].map((item, index) =>
               item.action ? (
                 <button
                   key={index}
-                  onClick={item.action}
+                  onClick={() => handleNavigation(null, item.action)}
                   className="flex items-center space-x-3 text-white hover:text-[#07bdbb] text-sm font-medium border-b border-transparent hover:border-[#07bdbb] transition-all w-full text-left"
                 >
                   <i
@@ -148,7 +154,10 @@ function Navbar() {
               ) : (
                 <button
                   key={index}
-                  onClick={() => handleMobileClick(item.href)}
+                  onClick={() => {
+                    setIsOpen(false);
+                    handleNavigation(item.href, null);
+                  }}
                   className="flex items-center space-x-3 text-white hover:text-[#07bdbb] text-sm font-medium border-b border-transparent hover:border-[#07bdbb] transition-all w-full text-left"
                 >
                   <i
@@ -161,8 +170,6 @@ function Navbar() {
           </div>
         </div>
       </nav>
-
-      {/* Contact Modal */}
       <ContactModal isOpen={isContactModalOpen} onClose={closeContactModal} />
     </>
   );

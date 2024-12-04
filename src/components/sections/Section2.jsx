@@ -25,20 +25,15 @@ const ServiceCard = ({ service }) => {
       initial="hidden"
       animate={controls}
     >
-      {/* Ícone com efeito de brilho */}
       <div className="w-14 h-14 flex items-center justify-center bg-[#07bdbb] rounded-full shadow-md mb-6 transition-transform group-hover:scale-110 group-hover:bg-white">
         <i className={`${service.icon} text-black text-2xl`}></i>
       </div>
-
-      {/* Título e Descrição */}
       <h3 className="text-xl font-bold text-white mb-4 group-hover:text-[#07bdbb] transition-colors duration-300">
         {service.title}
       </h3>
       <p className="text-gray-300 text-sm leading-relaxed group-hover:text-white">
         {service.description}
       </p>
-
-      {/* Efeito decorativo */}
       <div className="absolute inset-0 rounded-xl border-2 border-transparent group-hover:border-[#07bdbb] transition-all duration-300"></div>
     </motion.div>
   );
@@ -93,7 +88,6 @@ const Services = () => {
   return (
     <section id="tecnologias" className="bg-black py-16">
       <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-10">
-        {/* Título da seção */}
         <div className="text-center mb-12">
           <h2
             className="text-4xl font-bold text-[#07bdbb] tracking-wide"
@@ -105,8 +99,6 @@ const Services = () => {
             Soluções que combinam tecnologia de ponta com design inovador.
           </p>
         </div>
-
-        {/* Grade de serviços */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service) => (
             <ServiceCard key={service.id} service={service} />

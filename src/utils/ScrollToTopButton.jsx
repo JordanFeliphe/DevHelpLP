@@ -28,9 +28,7 @@ export default function ScrollToTopButton() {
           aria-label="Voltar ao topo"
         >
           <div className="relative flex items-center justify-center">
-            {/* Fundo tecnológico animado */}
             <span className="absolute inset-0 w-full h-full bg-[#07bdbb] rounded-md blur-md opacity-30 group-hover:animate-pulse"></span>
-            {/* Ícone */}
             <i className="fas fa-arrow-up text-white text-lg"></i>
           </div>
         </button>
