@@ -33,33 +33,30 @@ export default function Footer() {
           {/* Conecte-se */}
           <div className="w-full md:flex-1">
             <h2 className="text-lg font-semibold text-[#07bdbb] mb-3">Conecte-se</h2>
-            <div className="flex space-x-4 mb-6">
+            <div className="flex space-x-4">
+              {/* GitHub Button */}
               <a
                 href="https://github.com/midcompany"
                 target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 flex items-center justify-center border border-[#07bdbb] text-[#07bdbb] rounded-full hover:bg-[#07bdbb] hover:text-black transition-all duration-300"
               >
                 <i className="fab fa-github"></i>
               </a>
+
+              {/* WhatsApp Button */}
+              <a
+                href="https://wa.me/559831960694"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 flex items-center justify-center border border-[#07bdbb] text-[#07bdbb] rounded-full hover:bg-[#07bdbb] hover:text-black transition-all duration-300"
+              >
+                <i className="fab fa-whatsapp"></i>
+              </a>
             </div>
 
-            {/* Formulário de E-mail */}
-            <div>
-              <h2 className="text-lg font-semibold text-[#07bdbb] mb-3">Receba nossas novidades</h2>
-              <form className="flex space-x-2">
-                <input
-                  type="email"
-                  placeholder="Digite seu e-mail"
-                  className="flex-grow p-2 text-sm rounded-md border border-gray-700 bg-gray-800 text-gray-300 focus:outline-none focus:ring-2 focus:ring-[#07bdbb]"
-                />
-                <button
-                  type="submit"
-                  className="px-4 py-2 bg-[#07bdbb] text-black text-sm font-medium rounded-md hover:bg-white hover:text-black transition-all duration-300"
-                >
-                  Enviar
-                </button>
-              </form>
-            </div>
+
+    
           </div>
         </div>
 

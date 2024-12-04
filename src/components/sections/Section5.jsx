@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaJs } from "react-icons/fa";
+import { FaReact, FaNodeJs, FaAws, FaPython } from "react-icons/fa";
 import { SiTailwindcss, SiTypescript } from "react-icons/si";
 
 const TechnologyCard = ({ technology }) => {
@@ -58,15 +58,15 @@ const Section5 = () => {
     },
     {
       id: 4,
-      name: "HTML",
-      description: "A base para estruturar o conteúdo de páginas web.",
-      icon: <FaHtml5 className="text-orange-500" />,
+      name: "AWS",
+      description: "Plataforma de serviços em nuvem para escalabilidade e confiabilidade.",
+      icon: <FaAws className="text-orange-500" />,
     },
     {
       id: 5,
-      name: "JavaScript",
-      description: "Linguagem essencial para adicionar interatividade às aplicações.",
-      icon: <FaJs className="text-yellow-500" />,
+      name: "Python",
+      description: "Linguagem poderosa para desenvolvimento web e automação.",
+      icon: <FaPython className="text-blue-600" />,
     },
     {
       id: 6,
