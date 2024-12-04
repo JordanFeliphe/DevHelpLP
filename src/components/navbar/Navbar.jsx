@@ -40,11 +40,11 @@ function Navbar() {
           {/* Menu Links (Desktop) */}
           <div className="hidden md:flex space-x-8">
             {[
-              { href: "#inicio", label: "Início", icon: "fas fa-home" },
+              { href: "/", label: "Início", icon: "fas fa-home" },
               { href: "#sobre", label: "Sobre", icon: "fas fa-info-circle" },
               { href: "#tecnologias", label: "Tecnologias", icon: "fas fa-tools" },
               { href: "#time", label: "Time", icon: "fas fa-users" },
-              { href: "#projetos", label: "Projetos", icon: "fas fa-project-diagram" },
+              { href: "/projects", label: "Projetos", icon: "fas fa-project-diagram" },
             ].map((item, index) => (
               <a
                 key={index}
